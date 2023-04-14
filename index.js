@@ -1,4 +1,52 @@
-// Define the Book class
+// Create UI elements for search and sorting
+const searchForm = document.createElement('form');
+searchForm.innerHTML = `
+ <input type="text" placeholder="Search" name="query">
+ <button type="submit">Search</button>`;
+
+const sortBySelect = document.createElement('select');
+sortBySelect.innerHTML = `
+ <option value="">Sort by...</option>
+ <option value="title">Title</option>
+ <option value="author">Author</option>
+`;
+
+const sortOrderToggle = document.createElement('button');
+sortOrderToggle.innerText = 'Toggle Sort Order (Ascending/Descending)';
+sortOrderToggle.dataset.ascending = 'true';
+
+// Append UI elements to the document body
+document.body.appendChild(searchForm);
+document.body.appendChild(sortBySelect);
+document.body.appendChild(sortOrderToggle);
+
+// Event listeners
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const query = event.target.query.value;
+  const searchResults = bookshelf.search(query);
+  const existingBookshelf = document.querySelector('.bookshelf');
+  document.body.replaceChild(bookshelf.render(searchResults), existingBookshelf);
+});
+
+sortBySelect.addEventListener('change', () => {
+ const sortBy = sortBySelect.value;
+ let ascending = sortOrderToggle.getAttribute('data-ascending') !== 'false';
+ const sortedBooks = bookshelf.sortBooks(sortBy, ascending);
+ const existingBookshelf = document.querySelector('.bookshelf');
+ document.body.replaceChild(bookshelf.render(sortedBooks), existingBookshelf);
+});
+
+sortOrderToggle.addEventListener('click', () => {
+  const ascending = sortOrderToggle.dataset.ascending === 'true';
+  sortOrderToggle.dataset.ascending = !ascending;
+  const sortBy = sortBySelect.value;
+  const sortedBooks = bookshelf.sortBooks(sortBy, !ascending);
+  const existingBookshelf = document.querySelector('.bookshelf');
+  document.body.replaceChild(bookshelf.render(sortedBooks), existingBookshelf);
+ });
+ 
+ // Define the Book class
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -108,50 +156,3 @@ document.body.addEventListener('click', (event) => {
 // Append the favorite count element to the document body
 document.body.appendChild(favoriteCountElement);
 
-// Create UI elements for search and sorting
-const searchForm = document.createElement('form');
-searchForm.innerHTML = `
- <input type="text" placeholder="Search" name="query">
- <button type="submit">Search</button>`;
-
-const sortBySelect = document.createElement('select');
-sortBySelect.innerHTML = `
- <option value="">Sort by...</option>
- <option value="title">Title</option>
- <option value="author">Author</option>
-`;
-
-const sortOrderToggle = document.createElement('button');
-sortOrderToggle.innerText = 'Toggle Sort Order (Ascending/Descending)';
-sortOrderToggle.dataset.ascending = 'true';
-
-// Append UI elements to the document body
-document.body.appendChild(searchForm);
-document.body.appendChild(sortBySelect);
-document.body.appendChild(sortOrderToggle);
-
-// Event listeners
-searchForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const query = event.target.query.value;
-  const searchResults = bookshelf.search(query);
-  const existingBookshelf = document.querySelector('.bookshelf');
-  document.body.replaceChild(bookshelf.render(searchResults), existingBookshelf);
-});
-
-sortBySelect.addEventListener('change', () => {
- const sortBy = sortBySelect.value;
- let ascending = sortOrderToggle.getAttribute('data-ascending') !== 'false';
- const sortedBooks = bookshelf.sortBooks(sortBy, ascending);
- const existingBookshelf = document.querySelector('.bookshelf');
- document.body.replaceChild(bookshelf.render(sortedBooks), existingBookshelf);
-});
-
-sortOrderToggle.addEventListener('click', () => {
-  const ascending = sortOrderToggle.dataset.ascending === 'true';
-  sortOrderToggle.dataset.ascending = !ascending;
-  const sortBy = sortBySelect.value;
-  const sortedBooks = bookshelf.sortBooks(sortBy, !ascending);
-  const existingBookshelf = document.querySelector('.bookshelf');
-  document.body.replaceChild(bookshelf.render(sortedBooks), existingBookshelf);
- });
