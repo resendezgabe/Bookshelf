@@ -46,6 +46,18 @@ sortOrderToggle.addEventListener('click', () => {
   document.body.replaceChild(bookshelf.render(sortedBooks), existingBookshelf);
  });
  
+ // Create a wrapper for search and sorting elements
+const searchAndSortWrapper = document.createElement('div');
+searchAndSortWrapper.classList.add('search-and-sort-wrapper');
+
+// Append UI elements to the search and sort wrapper
+searchAndSortWrapper.appendChild(searchForm);
+searchAndSortWrapper.appendChild(sortBySelect);
+searchAndSortWrapper.appendChild(sortOrderToggle);
+
+// Append the search and sort wrapper to the document body
+document.body.appendChild(searchAndSortWrapper);
+
  // Define the Book class
 class Book {
   constructor(title, author) {
@@ -143,7 +155,7 @@ function addFavoriteButtonListener(bookElement, book) {
    updateFavoriteCountAndList();
  });
 }
-
+// adds a click event listener to the document.body
 document.body.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON' && event.target.closest('.book') && (event.target.innerText === 'Favorite' || event.target.innerText === 'Unfavorite')) {
     const bookElement = event.target.closest('.book');
@@ -155,4 +167,5 @@ document.body.addEventListener('click', (event) => {
 
 // Append the favorite count element to the document body
 document.body.appendChild(favoriteCountElement);
+
 

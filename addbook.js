@@ -1,3 +1,4 @@
+// Create form element for adding new books to the bookshelf
 const addBookForm = document.createElement('form');
 addBookForm.innerHTML = `
   <label for="title">Title:</label>
@@ -8,6 +9,7 @@ addBookForm.innerHTML = `
 `;
 document.body.appendChild(addBookForm);
 
+// Handle click event on "Favorite" button of a book element
 function handleFavoriteButtonClick(bookElement, book) {
     book.toggleFavorite();
     const favoriteButton = bookElement.querySelector('button');
@@ -20,6 +22,7 @@ function handleFavoriteButtonClick(bookElement, book) {
     updateFavoriteCountAndList();
   }
 
+// Add event listener for form submit on add book form
 addBookForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const title = event.target.title.value;
@@ -35,3 +38,5 @@ addBookForm.addEventListener('submit', (event) => {
     const existingBookshelf = document.querySelector('.bookshelf');
     document.body.replaceChild(bookshelf.render(bookshelf.books), existingBookshelf);
   });
+
+  

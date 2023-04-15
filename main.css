@@ -162,3 +162,59 @@ nav a:hover {
   list-style-type: none;
   padding: 0;
 }
+
+.search-form,
+.sort-by {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.search-form input,
+.search-form button,
+.sort-by select,
+.sort-order-toggle {
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  border: 1px solid #1ce783;
+  border-radius: 4px;
+  background-color: #313131;
+  color: #ffffff;
+}
+
+.search-form button,
+.sort-order-toggle {
+  background-color: #1ce783;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form button:hover,
+.sort-order-toggle:hover {
+  background-color: #15c769;
+}
+
+.sort-by select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.search-and-sort-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.title,
+.author {
+  font-size: 1em;
+  margin-bottom: 0;
+}

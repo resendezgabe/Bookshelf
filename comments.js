@@ -1,8 +1,10 @@
+// Handle click event on "Comment" button of a book element
 function handleCommentButtonClick(bookElement) {
     const commentForm = bookElement.querySelector('.comment-form');
     commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
   }
 
+  // Handle form submit event for adding comments to a book element
   function handleCommentFormSubmit(event, bookElement, book) {
     event.preventDefault();
     const comment = event.target.comment.value;
@@ -23,14 +25,15 @@ function handleCommentButtonClick(bookElement) {
     });
   }
 
+  // Add event listener for click on book element to handle comment form display
   document.body.addEventListener('click', (event) => {
-    // ...
     if (event.target.tagName === 'BUTTON' && event.target.closest('.book') && event.target.innerText === 'Comment') {
       const bookElement = event.target.closest('.book');
       handleCommentButtonClick(bookElement);
     }
   });
   
+  // Add event listener for form submit on comment form to handle comment addition
   document.body.addEventListener('submit', (event) => {
     if (event.target.tagName === 'FORM' && event.target.closest('.book')) {
       event.preventDefault();
